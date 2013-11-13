@@ -7,6 +7,8 @@
 require 'active_support/core_ext'
 require 'active_model'
 
+require 'cold_shoulder'
+
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 RSpec.configure do |config|
   config.treat_symbols_as_metadata_keys_with_true_values = true
@@ -21,7 +23,7 @@ RSpec.configure do |config|
 end
 
 # For testing active model validations!
-class TestMessageRecord
+class TestRecord
   include ActiveModel::Validations
   attr_accessor :body
 

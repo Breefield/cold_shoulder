@@ -1,9 +1,9 @@
-require 'test_helper'
+require 'spec_helper'
 
 module ActiveModel
   module Validations
 
-    describe ColdShoulder, "#score" do
+    describe ColdShoulderValidator, "#score" do
 
       # Ensure the Test Record is fresh
       before do
@@ -12,10 +12,10 @@ module ActiveModel
 
       it "finds Twitter handles" do
         TestRecord.validates :body, :contacts => false
-        TestRecord.new('Message me at @breefield on Twitter').valid?.must_equal false
+        expect(TestRecord.new('Message me at @breefield on Twitter').valid?).to be_false
       end
 
     end
-
+    
   end
 end
