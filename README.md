@@ -2,18 +2,14 @@ Cold Shoulder
 =============
 
 Rails validation gem which ensures no contact information can be passed into a field.
+Looks for Twitter handles, email addresses, and phone numbers
 
-Looks for:
-* Twitter handles
-* Email addresses
-* Phone numbers
-
-### Rails 4
+Rails 4:
 ```shell
 gem 'cold_shoulder'
 ```
 
-### Rails 3
+Rails 3:
 Same as above, it _should_ work with major versions of Rails 3, nothing too crazy going on in here.
 
 ## Usage Example
