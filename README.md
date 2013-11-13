@@ -26,7 +26,11 @@ end
 ### Validation Options
 ```ruby
 class Message < ActiveRecord::Base
-  validates :body, cold_shoulder: {ignore_twitter: true, ignore_email: true, ignore_phone: true}
+  validates :body, cold_shoulder: {
+    ignore_twitter: true, 
+    ignore_email: true, 
+    ignore_phone: true
+  }
 end
 ```
 
