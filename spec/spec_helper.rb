@@ -4,9 +4,6 @@
 # loaded once.
 #
 
-require 'active_support/core_ext'
-require 'active_model'
-
 require 'cold_shoulder'
 
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration

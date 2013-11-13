@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name        = 'cold_shoulder'
-  s.version     = '1.0.1'
+  s.version     = '1.0.3'
   s.date        = '2013-11-13'
   s.summary     = "Validate that there is no contact information in a field"
   s.description = "Rails validation gem which ensures no contact information can be passed through a field. Contact information is twitter handles, email addresses, and phone numbers."
@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
 
   
   s.add_runtime_dependency 'activemodel'
+  s.add_runtime_dependency 'activesupport'
 
   # For testing
   s.add_development_dependency 'rspec'
