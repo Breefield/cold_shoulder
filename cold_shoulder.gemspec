@@ -9,4 +9,7 @@ Gem::Specification.new do |s|
   s.files       = ["lib/cold_shoulder.rb"]
   s.homepage    = 'https://github.com/Breefield/cold_shoulder'
   s.license     = 'MIT'
+
+  # For testing
+  s.add_development_dependency 'rspec'
 end
