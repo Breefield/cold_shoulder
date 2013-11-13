@@ -10,6 +10,9 @@ Gem::Specification.new do |s|
   s.homepage    = 'https://github.com/Breefield/cold_shoulder'
   s.license     = 'MIT'
 
+  
+  s.add_runtime_dependency 'activemodel'
+
   # For testing
   s.add_development_dependency 'rspec'
 end
