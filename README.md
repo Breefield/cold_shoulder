@@ -42,7 +42,7 @@ dustin.hoffman@breefield.com
 dustin.hoffman at breefield.com
 dustin.hoffman [ a t ] breefield.com
 ```
-#### Phone numbers
+### Phone numbers
 ```
 208 871 2069
 (208)8712069
@@ -56,13 +56,20 @@ It won't missfire and catch:
 $1,000,000,000
 ```
 
-#### Twitter handles
+### Twitter handles
 ```
 @valid_username
 ```
 
-### With validation messages!
-![Example](http://f.cl.ly/items/1A3g1t3D3y3m3f1L1b3N/Screen%20Shot%202013-11-13%20at%203.00.18%20PM.png)
+### Override validation messages
+In config/locals/en.yml
+```
+en:
+  errors:
+    messages:
+      contains_twitter_handle: "contains the twitter handle: %{handles}"
+      contains_phone_number: "contains the phone number: %{phone_numbers}"
+      contains_email_address: "contains the email address: %{email_addresses}"
 
 ## Contributing
  
