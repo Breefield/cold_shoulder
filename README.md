@@ -32,7 +32,7 @@ end
 
 ## What can it catch?
 Here are some examples, straight out of the Rspec tests!
-#### Email addresses
+### Email addresses
 ```
 dustin.hoffman@breefield.com
 dustin.hoffman at breefield.com
