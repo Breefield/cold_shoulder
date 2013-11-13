@@ -27,7 +27,7 @@ class TestRecord
   include ActiveModel::Validations
   attr_accessor :body
 
-  def initialize(expiration_date)
+  def initialize(body)
     @body = body
   end
 end
