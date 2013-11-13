@@ -60,6 +60,8 @@ $1,000,000,000
 ```
 @valid_username
 ```
+
+### With validation messages!
 ![Example](http://f.cl.ly/items/1A3g1t3D3y3m3f1L1b3N/Screen%20Shot%202013-11-13%20at%203.00.18%20PM.png)
 
 ## Contributing
