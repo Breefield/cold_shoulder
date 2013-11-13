@@ -6,9 +6,12 @@ module ActiveModel
     class ColdShoulderValidator < EachValidator
 
       def validate_each(record, attr_name, value)
-        if value.blank?
+
+        # Twitter handles
+        if /@([A-Za-z0-9_]{1,15})/i.match value
           record.errors.add(attr_name, :contains_twitter_handle, options)
         end
+      
       end
 
       module HelperMethods
