@@ -70,6 +70,7 @@ en:
       contains_twitter_handle: "contains the twitter handle: %{handles}"
       contains_phone_number: "contains the phone number: %{phone_numbers}"
       contains_email_address: "contains the email address: %{email_addresses}"
+```
 
 ## Contributing
  
