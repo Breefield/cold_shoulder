@@ -35,10 +35,8 @@ module ActiveModel
 
       def validate_each(record, attr_name, value)
 
-        value = convert_numbers_at_words_in(value) unless options[:ignore_number_words]
-
         # Detect any contact methods in the value
-        detected = detect_contacts_in value
+        detected = detect_contacts_in value, options
 
         # Add errors for detected methods,  If there is a message, skip adding errors
         errors = add_errors_to_record(record, attr_name, detected, {skip: options[:message]})
@@ -54,11 +52,15 @@ module ActiveModel
         end
       end
 
-      def detect_contacts_in value
+      def detect_contacts_in value, options
+
+        num_words_value = value
+        num_words_value = convert_numbers_at_words_in(value) unless options[:ignore_number_words]
+
         # Remove spaces (the most basic way to avoid these detections)
-        globbed_value = value.gsub ' ', ''
+        globbed_value = num_words_value.gsub ' ', ''
         # Remove any characters not numbers or commas (commas are for $1,000 formatted numbers
-        bullshit_free_phone = value.gsub /[^0-9,]|\n/i, ''
+        bullshit_free_phone = num_words_value.gsub /[^0-9,]|\n/i, ''
 
         # Look for matches
         detected = {
@@ -100,12 +102,11 @@ module ActiveModel
 
       # Uses damerau-levenshtein to turn "one, two, three..." into "1, 2, 3..."
       def convert_numbers_at_words_in value
-
+        converted = String.new(value)
         NUMBER_WORDS.each_with_index do |word|
-          value.gsub!(word[0].to_s, word[1].to_s)
+          converted.gsub!(word[0].to_s, word[1].to_s)
         end
-
-        value
+        converted
       end
 
       module HelperMethods

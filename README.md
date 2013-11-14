@@ -49,6 +49,8 @@ dustin.hoffman [ a t ] breefield.com
 +1 (208)871-2069
 2 0 8 8 7 1 2 0 6 9
 2\n0\n8\n8\n7 lol Rob Ford \n1\n2\n0\n6\n9
+two oh eight 8 7 one 2 oh six 9
+two zero eight eight seven one two oh six nine
 ```
 
 It won't missfire and catch:
