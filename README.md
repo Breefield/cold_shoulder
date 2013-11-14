@@ -25,7 +25,8 @@ class Message < ActiveRecord::Base
   validates :body, cold_shoulder: {
     ignore_twitter: true, 
     ignore_email: true, 
-    ignore_phone: true
+    ignore_phone: true,
+    message: 'Use this to override all the specific messages'
   }
 end
 ```
@@ -63,9 +64,9 @@ In config/locals/en.yml
 en:
   errors:
     messages:
-      contains_twitter_handle: "contains the twitter handle: %{handles}"
-      contains_phone_number: "contains the phone number: %{phone_numbers}"
-      contains_email_address: "contains the email address: %{email_addresses}"
+      contains_twitter: "contains the twitter handle: %{handles}"
+      contains_phone: "contains the phone number: %{phone_numbers}"
+      contains_email: "contains the email address: %{email_addresses}"
 ```
 
 ## Contributing

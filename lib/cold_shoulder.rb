@@ -2,7 +2,7 @@ require 'active_model'
 require 'active_model/validations'
 
 require 'action_view'
-require 'action_view/helpers/number_helper.rb'
+require 'action_view/helpers'
 
 module ColdShoulder
   if defined?(Rails)
@@ -37,47 +37,40 @@ module ActiveModel
         bullshit_free_phone = value.gsub /[^0-9,]|\n/i, ''
 
         # Look for matches
-        twitter_handles = globbed_value.scan twitter_regex
-        email_addresses = value.scan email_regex
-        phone_numbers = globbed_value.scan(formatted_phone_regex).concat(
-          bullshit_free_phone.scan(formatted_phone_regex)
-        ).uniq
+        detected = {
+          twitter:  globbed_value.scan(twitter_regex),
+          email:    value.scan(email_regex),
+          phone:    globbed_value.scan(formatted_phone_regex).concat(
+            bullshit_free_phone.scan(formatted_phone_regex)
+          ).uniq
+        }
 
-        # Phone numbers
-        unless phone_numbers.empty? or options[:ignore_phone]
-          record.errors.add(attr_name, :contains_phone_number, options.merge(
-            phone_numbers: phone_numbers.map{ |p| 
-              defined?(Rails) ? number_to_phone(p[0]) : p[0]
-            }.join(', ')
-          ))
-        end
+        # Catchall for base
+        errors = false
 
-        # Email addys
-        unless email_addresses.empty? or options[:ignore_email]
-          record.errors.add(attr_name, :contains_email_address, options.merge(
-            email_addresses: email_addresses.map{|p| p[0] }.join(', ')
-          ))
-        else
+        [:twitter, :email, :phone].each do |type|
 
-          # Twitter handles
-          # Any email address is going to register twitter handles as well
-          unless twitter_handles.empty? or options[:ignore_twitter]
-            record.errors.add(attr_name, :contains_twitter_handle, options.merge(
-              handles: twitter_handles.map{|p| p[0] }.join(', ')
-            ))
+          unless detected[type].empty? or options["ignore_#{type}".to_sym]
+            errors = true
+            next if options[:message]
+            
+            record.errors.add(attr_name, "contains_#{type}".to_sym, options.merge(
+              detected: detected[type].map{ |p| 
+                type == :phone && defined?(Rails) ? number_to_phone(p[0], area_code: true) : p[0]
+              }.join(', ')
+            )) 
           end
 
         end
+
+        # A base mesage might be used
+        if errors and options[:message]
+          record.errors.add(:base, options[:message])
+        end
+
       end
 
       module HelperMethods
-        # Validates that the specified attributes do not contain contact information. 
-        # Happens by default on save.
-        #
-        #   class Message < ActiveRecord::Base
-        #     validates_no_contact_in :body
-        #   end
-
         def validates_with_cold_shouldr(*attr_names)
           validates_with ColdShoulderValidator, _merge_attributes(attr_names)
         end
