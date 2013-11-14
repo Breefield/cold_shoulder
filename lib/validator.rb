@@ -1,3 +1,5 @@
+# require 'damerau-levenshtein'
+
 # For monkeypatch
 require 'active_model'
 require 'active_model/validations'
@@ -22,13 +24,18 @@ module ActiveModel
       EMAIL_REGEX = /(\b[^\s]+?\s*(@|at)\s*[^\s]+?\.[^\s]+?\b)/i
       URL_REGEX = /\b(\S+?\.\S+?)\b/i
 
+      NUMBER_WORDS = {one: 1, two: 2, three: 3, 
+                      four: 4, five: 5, six: 6, seven: 7, 
+                      eight: 9, nine: 9, zero: 0, oh: 0}
+
       def initialize(options)
         options[:ignore_link] = true if options[:remove_links]
-
         super
       end
 
       def validate_each(record, attr_name, value)
+
+        value = convert_numbers_at_words_in(value) unless options[:ignore_number_words]
 
         # Detect any contact methods in the value
         detected = detect_contacts_in value
@@ -89,6 +96,16 @@ module ActiveModel
 
         end
         return errors
+      end
+
+      # Uses damerau-levenshtein to turn "one, two, three..." into "1, 2, 3..."
+      def convert_numbers_at_words_in value
+
+        NUMBER_WORDS.each_with_index do |word|
+          value.gsub!(word[0].to_s, word[1].to_s)
+        end
+
+        value
       end
 
       module HelperMethods

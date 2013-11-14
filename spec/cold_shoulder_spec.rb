@@ -48,6 +48,11 @@ module ActiveModel
         expect(@record.valid?).to (boolean ? be_true : be_false)
       end
 
+      it "finds the phone number 'two zero eight eight seven one two oh six nine'" do
+        @record = TestRecord.new('Call me at two zero eight eight seven one two zero six nine')
+        expect(@record.valid?).to (boolean ? be_true : be_false)
+      end
+
       it "finds the phone number '2088712069' hidden by newlines and other bullshit" do
         @record = TestRecord.new("2\n0\n8\n8\n7 Rob Ford smoked crack while in office \n1\n2\n0\n6\n9")
         expect(@record.valid?).to (boolean ? be_true : be_false)

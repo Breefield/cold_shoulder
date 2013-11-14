@@ -13,6 +13,7 @@ Gem::Specification.new do |s|
   
   s.add_runtime_dependency 'activemodel'
   s.add_runtime_dependency 'actionpack'
+  # s.add_runtime_dependency 'damerau-levenshtein'
 
   # For testing
   s.add_development_dependency 'rspec'
