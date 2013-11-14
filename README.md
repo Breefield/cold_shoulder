@@ -72,6 +72,7 @@ en:
       contains_twitter: "contains the twitter handle: %{handles}"
       contains_phone: "contains the phone number: %{phone_numbers}"
       contains_email: "contains the email address: %{email_addresses}"
+      contains_link: "contains the link: %{detected}"
 ```
 
 ## Contributing
