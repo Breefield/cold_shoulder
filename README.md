@@ -23,9 +23,11 @@ end
 ```ruby
 class Message < ActiveRecord::Base
   validates :body, cold_shoulder: {
-    ignore_twitter: true, 
-    ignore_email: true, 
-    ignore_phone: true,
+    ignore_twitter: true, # Don't add errors when twitter handles are detected
+    ignore_email: true,   # Don't add errors email addresses are detected
+    ignore_phone: true,   # Don't add errors when phones are detected
+    ignore_link: true,    # Don't add errors when links are detected
+    remove_links: true,   # Strip any found links from the actual saved value, setting to true will ignore links
     message: 'Use this to override all the specific messages'
   }
 end

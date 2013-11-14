@@ -4,3 +4,4 @@ en:
       contains_twitter: "contains the twitter handle: %{detected}"
       contains_phone: "contains the phone number: %{detected}"
       contains_email: "contains the email address: %{detected}"
+      contains_link: "contains the link: %{detected}"

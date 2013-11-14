@@ -59,6 +59,20 @@ module ActiveModel
       end
     end
 
+
+    # Links
+    shared_examples :links do |boolean|
+      it "finds the link 'breefield.com'" do
+        @record = TestRecord.new('My website is breefield.com')
+        expect(@record.valid?).to (boolean ? be_true : be_false)
+      end
+
+      it "finds the link 'http://www.breefield.com'" do
+        @record = TestRecord.new('My website is http://www.breefield.com')
+        expect(@record.valid?).to (boolean ? be_true : be_false)
+      end
+    end
+
     # Twitter handles
     shared_examples :twitter_handles do |boolean|
       it "finds a Twitter handle '@breefield'" do
@@ -92,6 +106,7 @@ module ActiveModel
         include_examples :twitter_handles, false
         include_examples :phone_numbers, false
         include_examples :email_addresses, false
+        include_examples :links, false
       end
 
       context '(ignoring all)' do
@@ -99,13 +114,15 @@ module ActiveModel
           TestRecord.validates :body, cold_shoulder: {
             ignore_twitter: true,
             ignore_phone: true,
-            ignore_email: true
+            ignore_email: true,
+            ignore_link: true
           }
         end
 
         include_examples :twitter_handles, true
         include_examples :phone_numbers, true
         include_examples :email_addresses, true
+        include_examples :links, true
       end
 
     end
