@@ -28,6 +28,7 @@ class Message < ActiveRecord::Base
     ignore_phone: true,   # Don't add errors when phones are detected
     ignore_link: true,    # Don't add errors when links are detected
     remove_links: true,   # Strip any found links from the actual saved value, setting to true will ignore links
+    ignore_number_words: true # Don't count 'zero, one, two' as '0, 1, 2' etc this is used to catch phone numbers as words
     message: 'Use this to override all the specific messages'
   }
 end
