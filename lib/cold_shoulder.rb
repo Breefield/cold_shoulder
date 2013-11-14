@@ -1,7 +1,8 @@
 require 'active_model'
 require 'active_model/validations'
-require 'active_support'
-require 'active_support/number_helper'
+
+require 'action_view'
+require 'action_view/helpers/number_helper.rb'
 
 module ColdShoulder
   if defined?(Rails)
@@ -20,7 +21,7 @@ module ActiveModel
 
     # Extend the rails each validator so that this can be used like any Rails validator
     class ColdShoulderValidator < EachValidator
-      include ActiveSupport::NumberHelper if defined?(Rails)
+      include ActionView::Helpers::NumberHelper if defined?(Rails)
 
       def validate_each(record, attr_name, value)
 
